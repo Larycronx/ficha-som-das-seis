@@ -270,14 +270,9 @@ foram definidas para atender ao grupo.
 
 <br>
 
-<img src="docs/assets/divisor-laranja.svg" width="100%" alt="">
+<img src="https://capsule-render.vercel.app/api?type=waving&height=229&color=timeGradient&section=footer&reversal=true&text=Entrar+na+mesa&textBg=false&fontColor=F5DEB3&fontSize=65&fontAlign=50&fontAlignY=63&animation=twinkling&rotate=0&strokeWidth=0&descSize=20&descAlign=50&descAlignY=60" width="100%" alt="Entrar na mesa">
 
 <br>
 
-[**Entrar na mesa**](https://ficha-som-das-seis.vercel.app)
+[![Entrar na mesa](https://img.shields.io/badge/ENTRAR_NA_MESA-161110?style=for-the-badge&labelColor=161110&color=161110)](https://ficha-som-das-seis.vercel.app)
 
-<br>
-
-<img src="docs/assets/borda-laranja.svg" width="100%" alt="">
-
-</div>
