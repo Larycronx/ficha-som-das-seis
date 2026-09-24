@@ -293,9 +293,9 @@ button:focus-visible, input:focus-visible, textarea:focus-visible { box-shadow: 
 
 @media (max-width: 1180px) {
   .app-shell { grid-template-columns: 210px minmax(0, 1fr); }
-  .roll-sidebar { position: fixed; z-index: 20; right: 16px; bottom: 16px; width: min(360px, calc(100vw - 32px)); min-height: auto; max-height: min(70vh, 520px); overflow-y: auto; padding: 16px; border: 1px solid rgba(213, 236, 229, .18); border-radius: 12px; box-shadow: 0 14px 35px rgba(0, 0, 0, .28); transition: transform .25s var(--ease-out); transform: translateY(calc(100% - 54px)); }
-  .roll-sidebar.is-open { transform: translateY(0); }
-  .roll-tab { position: absolute; top: 0; left: 16px; display: inline-flex; align-items: center; gap: 7px; min-height: 38px; padding: 0 11px; border: 1px solid rgba(82, 199, 201, .35); border-radius: 0 0 8px 8px; background: #2b4545; color: #d8efea; font-family: 'DM Mono', monospace; font-size: 9px; text-transform: uppercase; }
+  .roll-sidebar { position: fixed; z-index: 20; right: 16px; bottom: 16px; width: min(360px, calc(100vw - 32px)); height: 42px; min-height: 42px; overflow: hidden; padding: 0; border: 1px solid rgba(213, 236, 229, .18); border-radius: 12px; box-shadow: 0 14px 35px rgba(0, 0, 0, .28); transition: height .25s var(--ease-out); }
+  .roll-sidebar.is-open { height: min(70vh, 520px); max-height: min(70vh, 520px); overflow-y: auto; padding: 16px; }
+  .roll-tab { position: absolute; z-index: 2; top: 0; left: 0; display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 0 11px; border: 1px solid rgba(82, 199, 201, .35); border-radius: 8px 0 8px 0; background: #2b4545; color: #d8efea; font-family: 'DM Mono', monospace; font-size: 9px; text-transform: uppercase; }
   .roll-tab:active { transform: translateY(2px) scale(.97); }
   .roll-sidebar-header { margin-bottom: 12px; cursor: pointer; }
   .roll-sidebar h2 { font-size: 18px; }
@@ -338,7 +338,8 @@ button:focus-visible, input:focus-visible, textarea:focus-visible { box-shadow: 
   .skill-roll-picker { align-items: stretch; flex-direction: column; gap: 7px; }
   .skill-roll-picker select, .skill-roll-action { width: 100%; }
   .skill-roll-action { justify-content: center; margin-left: 0; }
-  .roll-sidebar { right: 10px; bottom: 10px; width: calc(100vw - 20px); padding: 13px; transform: translateY(calc(100% - 50px)); }
+  .roll-sidebar { right: 10px; bottom: 10px; width: calc(100vw - 20px); }
+  .roll-sidebar.is-open { padding: 13px; }
   .die-stage { padding: 20px 8px 18px; }
   .identity-panel { grid-template-columns: 1fr; }
   .portrait-column { display: grid; grid-template-columns: 108px 1fr; align-items: end; gap: 12px; }
