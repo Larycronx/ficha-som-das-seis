@@ -24,6 +24,7 @@ import {
   Unlock,
   UserRound,
   WandSparkles,
+  ArrowLeft,
 } from "lucide-react";
 import { toast } from "sonner";
 import type { User } from "@supabase/supabase-js";
@@ -310,9 +311,13 @@ function ProgressDots({
 
 export default function Home({
   user,
+  sheetId,
+  onBack,
   onSignOut,
 }: {
   user: User;
+  sheetId: string;
+  onBack: () => void;
   onSignOut: () => void;
 }) {
   // Estado principal da ficha e dos controles da tela.
@@ -323,13 +328,14 @@ export default function Home({
   const [roll, setRoll] = useState<RollResult | null>(null);
   const [lastSaved, setLastSaved] = useState("agora");
   const photoInputRef = useRef<HTMLInputElement>(null);
+  const handleBack = () => onBack();
 
   useEffect(() => {
     let cancelled = false;
     void supabase
       ?.from("character_sheets")
       .select("data")
-      .eq("user_id", user.id)
+      .eq("id", sheetId)
       .maybeSingle()
       .then(({ data }) => {
         if (cancelled) return;
@@ -339,15 +345,14 @@ export default function Home({
     return () => {
       cancelled = true;
     };
-  }, [user.id]);
+  }, [sheetId]);
 
   useEffect(() => {
     if (!loaded || !supabase) return;
     void supabase
       .from("character_sheets")
       .upsert(
-        { user_id: user.id, data: sheet, updated_at: new Date().toISOString() },
-        { onConflict: "user_id" }
+        { id: sheetId, user_id: user.id, data: sheet, updated_at: new Date().toISOString() }
       )
       .then(({ error }) => {
         if (error)
@@ -356,7 +361,7 @@ export default function Home({
           });
         else setLastSaved("agora");
       });
-  }, [loaded, sheet, user.id]);
+  }, [loaded, sheet, sheetId, user.id]);
 
   const update = (key: string, value: any) =>
     setSheet(current => ({ ...current, [key]: value }));
@@ -401,6 +406,12 @@ export default function Home({
     if (!file) return;
     const reader = new FileReader();
     reader.onload = () => {
+            <button
+              className="rail-help"
+              onClick={handleBack}
+            >
+              <ArrowLeft size={15} /> Minhas fichas
+            </button>
       update("photo", String(reader.result));
       toast.success("Retrato atualizado");
     };
@@ -571,8 +582,9 @@ export default function Home({
             <div className="tab-content">
               <section className="identity-panel panel-surface">
                 <div className="portrait-column">
+                  <div className="wanted-poster-label">PROCURADO</div>
                   <div
-                    className={`portrait-frame ${sheet.photo ? "has-photo" : ""}`}
+                    className={`portrait-frame wanted-frame ${sheet.photo ? "has-photo" : ""}`}
                   >
                     {sheet.photo ? (
                       <img

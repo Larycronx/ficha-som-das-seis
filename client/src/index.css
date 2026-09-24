@@ -394,3 +394,41 @@ button:focus-visible, input:focus-visible, textarea:focus-visible { box-shadow: 
   .admin-row { align-items: flex-start; flex-direction: column; gap: 8px; }
   .admin-row-actions { align-items: flex-start; flex-direction: column; gap: 8px; }
 }
+
+.hub-shell { position: relative; z-index: 1; min-height: 100vh; padding: 58px clamp(22px, 6vw, 90px); background: radial-gradient(circle at 82% 8%, rgba(216, 154, 62, .16), transparent 25%), var(--paper); }
+.hub-header { display: flex; max-width: 1120px; margin: 0 auto; align-items: flex-start; justify-content: space-between; gap: 24px; }
+.hub-header h1 { margin: 8px 0 10px; color: var(--ink); font-family: 'Rye', serif; font-size: clamp(32px, 5vw, 58px); font-weight: 400; }
+.hub-header p:not(.eyebrow) { max-width: 540px; margin: 0; color: var(--muted); font-size: 16px; line-height: 1.6; }
+.wanted-kicker { margin-bottom: 16px; color: var(--rose); font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .18em; }
+.hub-signout, .hub-create, .hub-open, .hub-delete { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--line); border-radius: 6px; font-weight: 600; }
+.hub-signout { padding: 9px 12px; background: transparent; color: var(--muted); font-size: 12px; }
+.hub-toolbar { display: flex; max-width: 1120px; margin: 58px auto 24px; align-items: center; justify-content: space-between; padding: 15px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.hub-toolbar div { display: flex; align-items: center; gap: 14px; }
+.hub-toolbar strong { color: var(--ink); font-family: 'DM Mono', monospace; font-size: 12px; }
+.hub-create { padding: 11px 15px; background: var(--ink-deep); color: #fff2df; font-size: 12px; }
+.hub-create:disabled { opacity: .45; }
+.character-grid { display: grid; max-width: 1120px; margin: 0 auto; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 22px; }
+.wanted-card { position: relative; display: flex; min-height: 340px; flex-direction: column; align-items: center; padding: 17px 16px 15px; border: 1px solid #bfa987; background: #e9d7b6; box-shadow: 5px 6px 0 rgba(100, 57, 31, .12); text-align: center; transform: rotate(-.5deg); }
+.wanted-card:nth-child(even) { transform: rotate(.7deg); }
+.wanted-card-top { display: flex; width: 100%; justify-content: space-between; color: var(--rose); font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .08em; }
+.wanted-card-top small { color: #8e765e; font-size: 8px; }
+.wanted-portrait { display: grid; width: 128px; height: 150px; margin: 17px 0 12px; overflow: hidden; place-items: center; border: 4px solid #f5e7cd; background: linear-gradient(145deg, #273943, #101d26); color: #d99a3e; box-shadow: 0 2px 0 rgba(72, 43, 25, .2); }
+.wanted-portrait img { width: 100%; height: 100%; object-fit: cover; }
+.wanted-card h2 { margin: 0; color: #4b2a20; font-family: 'Rye', serif; font-size: 19px; font-weight: 400; }
+.wanted-card p { min-height: 33px; margin: 8px 0 15px; color: #80664e; font-size: 11px; }
+.wanted-card-actions { display: flex; width: 100%; margin-top: auto; gap: 7px; }
+.hub-open { flex: 1; padding: 9px; background: #5d2820; color: #fff1d7; font-size: 11px; }
+.hub-delete { width: 34px; padding: 0; background: transparent; color: var(--rose); }
+.hub-empty { display: grid; max-width: 520px; margin: 70px auto; justify-items: center; gap: 12px; color: var(--muted); text-align: center; }
+.hub-empty h2 { margin: 0; color: var(--ink); font-family: 'Rye', serif; font-size: 25px; font-weight: 400; }
+.hub-empty p { margin: 0 0 10px; }
+
+.wanted-poster-label { margin-bottom: 7px; color: var(--rose); font-family: 'Rye', serif; font-size: 15px; letter-spacing: .08em; text-align: center; }
+.portrait-frame.wanted-frame { height: 190px; border-radius: 2px; border-color: #bfa987; box-shadow: 3px 4px 0 rgba(62, 38, 24, .13); }
+
+@media (max-width: 640px) {
+  .hub-shell { padding: 34px 20px; }
+  .hub-header, .hub-toolbar { align-items: flex-start; flex-direction: column; }
+  .hub-toolbar { margin-top: 36px; }
+  .wanted-card { min-height: 320px; }
+}

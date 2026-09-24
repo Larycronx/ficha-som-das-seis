@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import AdminDashboard from "./components/AdminDashboard";
 import AuthScreen from "./components/AuthScreen";
+import CharacterHub from "./components/CharacterHub";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Home from "./pages/Home";
 import { isSupabaseConfigured, supabase } from "./lib/supabase";
@@ -13,6 +14,7 @@ const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || "larypenha63@gmail.com";
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
   const [role, setRole] = useState<"player" | "admin">("player");
+  const [selectedSheetId, setSelectedSheetId] = useState<string | null>(null);
   const [loading, setLoading] = useState(isSupabaseConfigured);
 
   useEffect(() => {
@@ -44,7 +46,7 @@ export default function App() {
       {/* Disponibiliza tooltips e notificações para os componentes filhos. */}
       <TooltipProvider>
         <Toaster position="bottom-right" richColors />
-        {!isSupabaseConfigured || loading ? <AuthScreen /> : !user ? <AuthScreen /> : role === "admin" ? <AdminDashboard onSignOut={signOut} /> : <Home user={user} onSignOut={signOut} />}
+        {!isSupabaseConfigured || loading ? <AuthScreen /> : !user ? <AuthScreen /> : role === "admin" ? <AdminDashboard onSignOut={signOut} /> : selectedSheetId ? <Home user={user} sheetId={selectedSheetId} onBack={() => setSelectedSheetId(null)} onSignOut={signOut} /> : <CharacterHub user={user} onSelect={setSelectedSheetId} onSignOut={signOut} />}
       </TooltipProvider>
     </ErrorBoundary>
   );

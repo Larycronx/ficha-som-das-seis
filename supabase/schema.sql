@@ -9,7 +9,7 @@ create table public.profiles (
 
 create table public.character_sheets (
 	id uuid primary key default gen_random_uuid(),
-	user_id uuid not null unique references public.profiles(id) on delete cascade,
+	user_id uuid not null references public.profiles(id) on delete cascade,
 	data jsonb not null default '{}'::jsonb,
 	updated_at timestamptz not null default now()
 );
