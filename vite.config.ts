@@ -9,8 +9,7 @@ import { defineConfig } from "vite";
 const plugins = [react(), tailwindcss(), jsxLocPlugin()];
 
 export default defineConfig({
-  // GitHub Pages publica o projeto dentro de /ficha-som-das-seis/.
-  base: process.env.GITHUB_ACTIONS ? "/ficha-som-das-seis/" : "/",
+  base: "/",
   plugins,
   resolve: {
     alias: {
