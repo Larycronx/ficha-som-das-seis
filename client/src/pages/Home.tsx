@@ -384,7 +384,6 @@ export default function Home({
     const die = Math.floor(Math.random() * 6) + 1;
     const total = die + score;
     setRoll({ name: label, score, die, total });
-    setRollOpen(true);
     setRollPulse(current => current + 1);
     if (typeof navigator.vibrate === "function") navigator.vibrate(18);
     void supabase
