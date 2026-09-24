@@ -26,6 +26,8 @@ import {
   WandSparkles,
 } from "lucide-react";
 import { toast } from "sonner";
+import type { User } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabase";
 
 type TabKey = "personagem" | "equipamentos" | "montaria" | "notas";
 type Item = { id: number; nome: string; notas: string; qtd: number };
@@ -179,25 +181,33 @@ function ProgressDots({ value, max = 5, color = "cyan" }: { value: number; max?:
   );
 }
 
-export default function Home() {
+export default function Home({ user, onSignOut }: { user: User; onSignOut: () => void }) {
   // Estado principal da ficha e dos controles da tela.
   const [sheet, setSheet] = useState<Sheet>(() => readInitialSheet());
-  const [locked, setLocked] = useState<boolean>(() => localStorage.getItem(LOCK_KEY) === "true");
+  const [locked, setLocked] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const [activeTab, setActiveTab] = useState<TabKey>("personagem");
   const [roll, setRoll] = useState<RollResult | null>(null);
   const [lastSaved, setLastSaved] = useState("agora");
   const photoInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    // Salva automaticamente cada alteração no armazenamento local.
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(sheet));
-    setLastSaved("agora");
-  }, [sheet]);
+    let cancelled = false;
+    void supabase?.from("character_sheets").select("data").eq("user_id", user.id).maybeSingle().then(({ data }) => {
+      if (cancelled) return;
+      if (data?.data) setSheet({ ...cloneDefault(), ...data.data });
+      setLoaded(true);
+    });
+    return () => { cancelled = true; };
+  }, [user.id]);
 
   useEffect(() => {
-    // Mantém o bloqueio entre recarregamentos da página.
-    localStorage.setItem(LOCK_KEY, String(locked));
-  }, [locked]);
+    if (!loaded || !supabase) return;
+    void supabase.from("character_sheets").upsert({ user_id: user.id, data: sheet, updated_at: new Date().toISOString() }, { onConflict: "user_id" }).then(({ error }) => {
+      if (error) toast.error("Não foi possível salvar a ficha", { description: error.message });
+      else setLastSaved("agora");
+    });
+  }, [loaded, sheet, user.id]);
 
   const update = (key: string, value: any) => setSheet((current) => ({ ...current, [key]: value }));
   const tab = useMemo(() => tabs.find((item) => item.key === activeTab) ?? tabs[0], [activeTab]);
@@ -269,7 +279,7 @@ export default function Home() {
         <div className="brand-copy"><strong>Som das Seis</strong><span>FICHA DIGITAL</span></div>
         <div className="rail-rule" />
         <nav className="tab-nav" aria-label="Seções da ficha">
-          <div className="nav-label">FICHA DE ANA</div>
+          <div className="nav-label">FICHA DE {sheet.characterName.toUpperCase()}</div>
           {tabs.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.key;
@@ -283,8 +293,9 @@ export default function Home() {
           })}
         </nav>
         <div className="rail-bottom">
-          <div className="status-chip"><span className="status-dot" /> Salvamento local ativo</div>
+          <div className="status-chip"><span className="status-dot" /> Salvamento online ativo</div>
           <button className="rail-help" onClick={() => toast("Como usar", { description: "Clique nos nomes dos atributos para rolar. Use o cadeado para proteger os campos e a câmera para trocar o retrato." })}><CircleHelp size={15} /> Como usar</button>
+          <button className="rail-help" onClick={onSignOut}><Unlock size={15} /> Sair da conta</button>
         </div>
       </aside>
 
