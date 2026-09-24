@@ -398,7 +398,12 @@ export default function Home({
         total,
       })
       .then(({ error }) => {
-        if (error) toast.error("Resultado exibido, mas não foi salvo", { description: error.message });
+        if (error) {
+          const description = error.message.includes("success")
+            ? "Execute a migration 006 no Supabase para atualizar a tabela de rolagens."
+            : error.message;
+          toast.error("Resultado exibido, mas não foi salvo", { description });
+        }
       });
   };
 

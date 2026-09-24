@@ -95,6 +95,8 @@ Cada jogadora tem as próprias fichas, sem instalar nada.
 | Registro das rolagens no banco de dados |
 | Módulo opcional que mostra as rolagens no chat do **Foundry VTT** |
 
+Depois de atualizar a aplicação, execute no SQL Editor do Supabase as migrations `004_read_own_roll_events.sql`, `005_remove_single_sheet_constraint.sql` e `006_remove_roll_outcome.sql`.
+
 <br>
 
 <img src="docs/assets/divisor-laranja.svg" width="100%" alt="">
