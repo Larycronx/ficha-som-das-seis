@@ -105,7 +105,7 @@ const tabs: {
     key: "personagem",
     label: "Personagem",
     icon: UserRound,
-    hint: "Atributos e habilidades",
+    hint: "Atributos e antecedentes",
   },
   {
     key: "equipamentos",
@@ -826,12 +826,12 @@ export default function Home({
               </section>
 
               <SectionTitle
-                eyebrow="02 / HABILIDADES"
+                eyebrow="02 / ANTECEDENTES"
                 title="O que a personagem sabe fazer"
-                detail="As habilidades seguem a mesma lógica: 1d6 + valor preenchido."
+                detail="Os antecedentes seguem a mesma lógica: 1d6 + valor preenchido."
               />
               <div className="skill-roll-picker">
-                <label htmlFor="skill-to-roll">Habilidade para rolar</label>
+                <label htmlFor="skill-to-roll">Antecedente para rolar</label>
                 <select
                   id="skill-to-roll"
                   value={selectedSkillKey}
@@ -851,7 +851,7 @@ export default function Home({
                   }}
                   disabled={!locked}
                 >
-                  <Dice5 size={15} /> rolar habilidade
+                  <Dice5 size={15} /> rolar antecedente
                 </button>
               </div>
               <section className="skills-grid">
