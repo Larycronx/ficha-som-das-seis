@@ -34,7 +34,7 @@
 <table align="center">
 <tr>
 <td align="center" width="33%">
-<img src="docs/screenshots/login.png" alt="Tela de login: Entrar na mesa" width="100%">
+<img width="540" height="660" alt="image" src="https://github.com/user-attachments/assets/7037470d-c01a-4a5f-81a5-5f2560eb8cc7" />
 <br><sub><b>Entrar na mesa</b><br>Login com e-mail e senha</sub>
 </td>
 <td align="center" width="33%">
