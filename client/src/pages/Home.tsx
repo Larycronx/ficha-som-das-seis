@@ -29,8 +29,9 @@ import {
 import { toast } from "sonner";
 import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
+import AbilitiesTab from "@/components/AbilitiesTab";
 
-type TabKey = "personagem" | "equipamentos" | "montaria" | "notas";
+type TabKey = "personagem" | "habilidades" | "equipamentos" | "montaria" | "notas";
 type Item = { id: number; nome: string; notas: string; qtd: number };
 type Sheet = Record<string, any> & {
   characterName: string;
@@ -40,6 +41,7 @@ type Sheet = Record<string, any> & {
   photo: string;
   misc_items: Item[];
   horse_items: Item[];
+  selected_abilities: string[];
 };
 type RollResult = {
   name: string;
@@ -93,6 +95,7 @@ const defaultSheet: Sheet = {
   Nivel: 1,
   misc_items: [{ id: 1, nome: "", notas: "", qtd: 1 }],
   horse_items: [{ id: 1, nome: "", notas: "", qtd: 1 }],
+  selected_abilities: [],
 };
 
 const tabs: {
@@ -106,6 +109,12 @@ const tabs: {
     label: "Personagem",
     icon: UserRound,
     hint: "Atributos e antecedentes",
+  },
+  {
+    key: "habilidades",
+    label: "Habilidades",
+    icon: Sparkles,
+    hint: "Escolhas da personagem",
   },
   {
     key: "equipamentos",
@@ -936,6 +945,14 @@ export default function Home({
                 </div>
               </section>
             </div>
+          ) : null}
+
+          {activeTab === "habilidades" ? (
+            <AbilitiesTab
+              selectedIds={sheet.selected_abilities || []}
+              onChange={ids => update("selected_abilities", ids)}
+              locked={locked}
+            />
           ) : null}
 
           {activeTab === "equipamentos" ? (
