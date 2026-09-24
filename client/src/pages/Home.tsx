@@ -543,6 +543,7 @@ export default function Home({
             <strong>{tab.label.toUpperCase()}</strong>
           </div>
           <div className="top-actions">
+            <button className="lock-button sheet-switch-button" onClick={onBack} title="Voltar para escolher outra ficha"><ArrowLeft size={15} /> Minhas fichas</button>
             <span className="saved-indicator">
               <Save size={13} /> salvo {lastSaved}
             </span>

@@ -6,9 +6,17 @@ import { supabase } from "@/lib/supabase";
 type SheetRecord = {
   id: string;
   updated_at: string;
-  data: { characterName?: string; player?: string };
+  data: Record<string, any>;
   owner_email: string;
 };
+
+const attributes = [
+  ["Físico", "fis_score"], ["Agilidade", "agi_score"], ["Intelecto", "int_score"], ["Coragem", "cor_score"],
+];
+const skills = [
+  ["Combate", "combate_score"], ["Negócios", "negocios_score"], ["Montaria", "montaria_score"], ["Tradição", "tradicao_score"],
+  ["Labuta", "labuta_score"], ["Exploração", "exploracao_score"], ["Roubo", "roubo_score"], ["Medicina", "medicina_score"],
+];
 
 export default function AdminDashboard({ onSignOut }: { onSignOut: () => void }) {
   const [sheets, setSheets] = useState<SheetRecord[]>([]);
@@ -50,7 +58,22 @@ export default function AdminDashboard({ onSignOut }: { onSignOut: () => void })
       <section className="admin-list">
         {loading ? <p className="admin-empty">Carregando fichas...</p> : sheets.length === 0 ? <p className="admin-empty">Nenhuma ficha foi salva ainda.</p> : sheets.map((sheet) => <article className="admin-row" key={sheet.id}><div><strong>{sheet.data?.characterName || "Personagem sem nome"}</strong><span>{sheet.owner_email}</span></div><div className="admin-row-actions"><time>{new Date(sheet.updated_at).toLocaleString("pt-BR")}</time><button className="admin-button" onClick={() => setSelected(sheet)}>abrir ficha</button><button className="admin-button danger-button" onClick={() => void deleteSheet(sheet)}>excluir</button></div></article>)}
       </section>
-      {selected ? <section className="admin-detail"><div className="admin-detail-header"><div><p className="eyebrow">FICHA SELECIONADA</p><h2>{selected.data?.characterName || "Personagem sem nome"}</h2><span>{selected.owner_email}</span></div><button className="admin-button" onClick={() => setSelected(null)}>fechar</button></div><pre>{JSON.stringify(selected.data, null, 2)}</pre></section> : null}
+      {selected ? <VisualSheet sheet={selected} onClose={() => setSelected(null)} /> : null}
     </main>
   );
+}
+
+function VisualSheet({ sheet, onClose }: { sheet: SheetRecord; onClose: () => void }) {
+  const data = sheet.data;
+  return <section className="admin-detail visual-sheet">
+    <div className="admin-detail-header"><div><p className="eyebrow">FICHA SELECIONADA</p><h2>{data.characterName || "Personagem sem nome"}</h2><span>{sheet.owner_email}</span></div><button className="admin-button" onClick={onClose}>voltar para fichas</button></div>
+    <div className="visual-sheet-grid">
+      <div className="visual-sheet-portrait">{data.photo ? <img src={data.photo} alt="Retrato da personagem" /> : <span>SEM RETRATO</span>}</div>
+      <div className="visual-sheet-identity"><p><b>Jogador:</b> {data.player || "não informado"}</p><p><b>Conceito:</b> {data.concept || "não informado"}</p><p><b>Antecedente:</b> {data.background || "não informado"}</p><p><b>Nível:</b> {data.Nivel || 1}</p></div>
+    </div>
+    <div className="visual-section"><h3>Atributos</h3><div className="visual-values">{attributes.map(([label, key]) => <span key={key}><b>{label}</b>{data[key] ?? 0} / 5</span>)}</div></div>
+    <div className="visual-section"><h3>Habilidades</h3><div className="visual-values">{skills.map(([label, key]) => <span key={key}><b>{label}</b>{data[key] ?? 0} / 5</span>)}</div></div>
+    <div className="visual-section visual-columns"><div><h3>Recursos</h3><p>Vida: {data.Vida ?? 0}</p><p>Defesa: {data.Defesa ?? 5}</p><p>Dinheiro: U$ {data.dinheiro ?? 0}</p><p>Reputação: {data.Reputacao || "não informada"}</p></div><div><h3>Montaria</h3><p>Nome: {data.nome_cavalo || "sem montaria"}</p><p>Fidelidade: {data.fidelidade_cavalo ?? 0}</p></div></div>
+    <div className="visual-section"><h3>Notas</h3><p className="visual-notes">{data.notas_campo || "Nenhuma nota registrada."}</p></div>
+  </section>;
 }
