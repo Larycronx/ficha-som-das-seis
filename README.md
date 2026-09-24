@@ -263,7 +263,7 @@ em vez de deixar uma jogadora sem acesso à ficha, foi criada uma alternativa pr
 acessível pelo navegador e adaptada ao funcionamento da mesa.
 
 O desenvolvimento contou com apoio de inteligência artificial como ferramenta de suporte para programação,<br>
-organização, documentação e resolução de problemas técnicos.<br>
+organização e documentação.<br>
 As decisões sobre a necessidade do sistema, o funcionamento da mesa e a solução final<br>
 foram definidas para atender ao grupo.
 
