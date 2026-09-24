@@ -1,11 +1,5 @@
 <div align="center">
 
-```
-═══════════════════════════════════════════
-       SOM DAS SEIS  /  FICHA DIGITAL
-═══════════════════════════════════════════
-```
-
 # SOM DAS SEIS
 
 ### Ficha digital online para o sistema de RPG **Som das Seis**
@@ -275,11 +269,7 @@ foram definidas para atender ao grupo.
 
 <br>
 
-```
-═══════════════════════════════════════════
-      Feito com poeira, café e d6
-═══════════════════════════════════════════
-```
+
 
 [**Entrar na mesa**](https://ficha-som-das-seis.vercel.app)
 
