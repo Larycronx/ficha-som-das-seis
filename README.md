@@ -1,10 +1,8 @@
 <div align="center">
 
-<img src="docs/assets/borda-laranja.svg" width="100%" alt="">
+<img src="https://capsule-render.vercel.app/api?type=waving&height=229&color=timeGradient&section=header&reversal=true&text=SOM+DAS+SEIS&textBg=false&fontColor=F5DEB3&fontSize=65&fontAlign=50&fontAlignY=50&animation=twinkling&rotate=0&strokeWidth=0&descSize=20&descAlign=50&descAlignY=60" width="100%" alt="SOM DAS SEIS Banner">
 
 <br>
-
-# SOM DAS SEIS
 
 ### Ficha digital online para o sistema de RPG **Som das Seis**
 
