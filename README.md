@@ -1,5 +1,9 @@
 <div align="center">
 
+<img src="docs/assets/borda-laranja.svg" width="100%" alt="">
+
+<br>
+
 # SOM DAS SEIS
 
 ### Ficha digital online para o sistema de RPG **Som das Seis**
@@ -19,7 +23,7 @@
 
 <br>
 
----
+<img src="docs/assets/divisor-laranja.svg" width="100%" alt="">
 
 <br>
 
@@ -46,7 +50,7 @@
 
 <br>
 
----
+<img src="docs/assets/divisor-laranja.svg" width="100%" alt="">
 
 <br>
 
@@ -62,7 +66,7 @@ Cada jogadora tem as próprias fichas, sem instalar nada.
 
 <br>
 
----
+<img src="docs/assets/divisor-laranja.svg" width="100%" alt="">
 
 <br>
 
@@ -93,7 +97,7 @@ Cada jogadora tem as próprias fichas, sem instalar nada.
 
 <br>
 
----
+<img src="docs/assets/divisor-laranja.svg" width="100%" alt="">
 
 <br>
 
@@ -117,7 +121,7 @@ abrir os dados de uma ficha, excluir fichas e acompanhar as rolagens registradas
 
 <br>
 
----
+<img src="docs/assets/divisor-laranja.svg" width="100%" alt="">
 
 <br>
 
@@ -129,7 +133,7 @@ abrir os dados de uma ficha, excluir fichas e acompanhar as rolagens registradas
 
 <br>
 
----
+<img src="docs/assets/divisor-laranja.svg" width="100%" alt="">
 
 <br>
 
@@ -210,7 +214,7 @@ A cada alteração enviada para a `main`, a Vercel pode iniciar um novo deploy a
 
 <br>
 
----
+<img src="docs/assets/divisor-laranja.svg" width="100%" alt="">
 
 <br>
 
@@ -231,7 +235,7 @@ e usa somente a chave pública e as políticas de segurança do Supabase.
 
 <br>
 
----
+<img src="docs/assets/divisor-laranja.svg" width="100%" alt="">
 
 <br>
 
@@ -246,7 +250,7 @@ Senhas reais não devem ser salvas no código nem no repositório
 
 <br>
 
----
+<img src="docs/assets/divisor-laranja.svg" width="100%" alt="">
 
 <br>
 
@@ -263,12 +267,14 @@ foram definidas para atender ao grupo.
 
 <br>
 
----
+<img src="docs/assets/divisor-laranja.svg" width="100%" alt="">
 
 <br>
 
-
-
 [**Entrar na mesa**](https://ficha-som-das-seis.vercel.app)
+
+<br>
+
+<img src="docs/assets/borda-laranja.svg" width="100%" alt="">
 
 </div>
