@@ -61,7 +61,7 @@ class SomDasSeisRollBridge {
       const rolls = await response.json();
       for (const roll of rolls) {
         this.lastCreatedAt = roll.created_at;
-        await ChatMessage.create({ speaker: { alias: "Som das Seis" }, content: `<strong>${escapeHtml(roll.character_name || "Personagem")}</strong> rolou <strong>${escapeHtml(roll.roll_name)}</strong>: <strong>${roll.die} + ${roll.score} = ${roll.total}</strong> <span>${roll.success ? "Sucesso" : "Falha"}</span>` });
+        await ChatMessage.create({ speaker: { alias: "Som das Seis" }, content: `<strong>${escapeHtml(roll.character_name || "Personagem")}</strong> rolou <strong>${escapeHtml(roll.roll_name)}</strong>: <strong>${roll.die} + ${roll.score} = ${roll.total}</strong>` });
       }
     } catch (error) {
       console.error(`${MODULE_ID} |`, error);

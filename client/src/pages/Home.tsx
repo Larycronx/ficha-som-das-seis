@@ -46,7 +46,6 @@ type RollResult = {
   score: number;
   die: number;
   total: number;
-  success: boolean;
 };
 
 const STORAGE_KEY = "som-das-seis-ficha";
@@ -326,6 +325,9 @@ export default function Home({
   const [loaded, setLoaded] = useState(false);
   const [activeTab, setActiveTab] = useState<TabKey>("personagem");
   const [roll, setRoll] = useState<RollResult | null>(null);
+  const [rollOpen, setRollOpen] = useState(false);
+  const [rollPulse, setRollPulse] = useState(0);
+  const [selectedSkillKey, setSelectedSkillKey] = useState(skills[0].key);
   const [lastSaved, setLastSaved] = useState("agora");
   const photoInputRef = useRef<HTMLInputElement>(null);
   const handleBack = () => onBack();
@@ -371,21 +373,33 @@ export default function Home({
   );
 
   const doRoll = (label: string, key: string) => {
+    if (!locked) {
+      toast.info("Bloqueie a ficha para rolar", {
+        description: "Assim os valores permanecem protegidos durante a sessão.",
+      });
+      return;
+    }
     // Soma o atributo escolhido a um dado de seis lados e exibe o resultado.
     const score = Number(sheet[key] ?? 0);
     const die = Math.floor(Math.random() * 6) + 1;
     const total = die + score;
-    const success = total >= 7;
-    setRoll({ name: label, score, die, total, success });
-    void supabase?.from("roll_events").insert({
-      user_id: user.id,
-      character_name: sheet.characterName || "Personagem sem nome",
-      roll_name: label,
-      score,
-      die,
-      total,
-      success,
-    });
+    setRoll({ name: label, score, die, total });
+    setRollOpen(true);
+    setRollPulse(current => current + 1);
+    if (typeof navigator.vibrate === "function") navigator.vibrate(18);
+    void supabase
+      ?.from("roll_events")
+      .insert({
+        user_id: user.id,
+        character_name: sheet.characterName || "Personagem sem nome",
+        roll_name: label,
+        score,
+        die,
+        total,
+      })
+      .then(({ error }) => {
+        if (error) toast.error("Resultado exibido, mas não foi salvo", { description: error.message });
+      });
   };
 
   const toggleLock = () => {
@@ -695,13 +709,15 @@ export default function Home({
                     <button
                       className="attribute-trigger"
                       onClick={() => doRoll(attribute.label, attribute.key)}
+                      aria-disabled={!locked}
+                      aria-label={`Rolar ${attribute.label}`}
                     >
                       <span className="attribute-symbol">{attribute.icon}</span>
                       <span className="attribute-short">{attribute.short}</span>
+                      <span className="attribute-name">{attribute.label}</span>
                       <Dice5 size={16} />
                     </button>
                     <div className="attribute-main">
-                      <h3>{attribute.label}</h3>
                       <p>{attribute.description}</p>
                     </div>
                     <div className="attribute-score">
@@ -806,26 +822,69 @@ export default function Home({
               <SectionTitle
                 eyebrow="02 / HABILIDADES"
                 title="O que a personagem sabe fazer"
-                detail="As habilidades seguem a mesma lógica: 1d6 + valor, com sucesso a partir de 7."
+                detail="As habilidades seguem a mesma lógica: 1d6 + valor preenchido."
               />
+              <div className="skill-roll-picker">
+                <label htmlFor="skill-to-roll">Habilidade para rolar</label>
+                <select
+                  id="skill-to-roll"
+                  value={selectedSkillKey}
+                  onChange={event => setSelectedSkillKey(event.target.value)}
+                >
+                  {skills.map(skill => (
+                    <option key={skill.key} value={skill.key}>
+                      {skill.label} (+{Number(sheet[skill.key] ?? 0)})
+                    </option>
+                  ))}
+                </select>
+                <button
+                  className="skill-roll-action"
+                  onClick={() => {
+                    const skill = skills.find(item => item.key === selectedSkillKey) ?? skills[0];
+                    doRoll(skill.label, skill.key);
+                  }}
+                  disabled={!locked}
+                >
+                  <Dice5 size={15} /> rolar habilidade
+                </button>
+              </div>
               <section className="skills-grid">
                 {skills.map(skill => {
                   const Icon = skill.icon;
                   return (
-                    <button
+                    <article
                       key={skill.key}
                       className="skill-card"
-                      onClick={() => doRoll(skill.label, skill.key)}
                     >
                       <span className="skill-icon">
                         <Icon size={16} />
                       </span>
                       <span className="skill-name">{skill.label}</span>
-                      <span className="skill-score">
-                        {sheet[skill.key]} <small>/5</small>
-                      </span>
-                      <Dice5 size={14} className="skill-die" />
-                    </button>
+                      <label className="skill-score" title={locked ? "Desbloqueie a ficha para editar" : `Editar valor de ${skill.label}`}>
+                        <input
+                          type="number"
+                          min={0}
+                          max={5}
+                          inputMode="numeric"
+                          value={sheet[skill.key] ?? 0}
+                          onChange={event => {
+                            const value = event.target.value;
+                            if (value === "") {
+                              update(skill.key, "");
+                              return;
+                            }
+                            update(skill.key, Math.min(5, Math.max(0, Number(value))));
+                          }}
+                          onBlur={event => {
+                            const value = Number(event.target.value);
+                            update(skill.key, Number.isFinite(value) ? Math.min(5, Math.max(0, value)) : 0);
+                          }}
+                          disabled={locked}
+                          aria-label={`Valor de ${skill.label}`}
+                        />
+                        <small>/5</small>
+                      </label>
+                    </article>
                   );
                 })}
               </section>
@@ -899,7 +958,15 @@ export default function Home({
         </div>
       </main>
 
-      <aside className="roll-sidebar">
+      <aside className={`roll-sidebar ${rollOpen ? "is-open" : ""}`}>
+        <button
+          className="roll-tab"
+          onClick={() => setRollOpen(current => !current)}
+          aria-expanded={rollOpen}
+          aria-label={rollOpen ? "Fechar resultado da rolagem" : "Abrir resultado da rolagem"}
+        >
+          <Dice5 size={16} /> <span>Resultado</span>
+        </button>
         <div className="roll-sidebar-header">
           <div>
             <div className="eyebrow">MESA DE ROLAGEM</div>
@@ -911,7 +978,8 @@ export default function Home({
         </div>
         {roll ? (
           <div
-            className={`roll-result ${roll.success ? "success" : "failure"}`}
+            key={rollPulse}
+            className="roll-result"
           >
             <div className="roll-result-top">
               <span className="roll-label">
@@ -925,17 +993,6 @@ export default function Home({
               <strong>{roll.score}</strong>
               <span className="equals">=</span>
               <strong className="total">{roll.total}</strong>
-            </div>
-            <div className="outcome">
-              <span className="outcome-mark">{roll.success ? "✓" : "×"}</span>
-              <div>
-                <strong>{roll.success ? "Sucesso" : "Falha"}</strong>
-                <span>
-                  {roll.success
-                      ? "A sorte soprou a favor da personagem."
-                    : "Nem toda estrada se abre na primeira tentativa."}
-                </span>
-              </div>
             </div>
             <div className="roll-again">
               <button
@@ -965,9 +1022,7 @@ export default function Home({
             </p>
             <div className="empty-tip">
               <Sparkles size={14} />
-              <span>
-                um resultado <b>7 ou mais</b> é sucesso
-              </span>
+              <span>o total combina o dado com o valor preenchido</span>
             </div>
           </div>
         )}
@@ -982,7 +1037,7 @@ export default function Home({
             <span>+</span>
             <span className="rule-number">valor</span>
             <ChevronRight size={14} />
-            <span className="rule-success">≥ 7</span>
+            <span className="rule-number">total</span>
           </div>
           <p>
             O valor é o número preenchido em cada cartão. Você pode editar
@@ -1449,17 +1504,6 @@ function NotesTab({
           />
         </div>
         <div className="notes-aside">
-          <div className="panel-surface prompt-card">
-            <Sparkles size={17} />
-            <div>
-              <div className="eyebrow">PROMPT DE SESSÃO</div>
-              <h3>O que a personagem não contou?</h3>
-              <p>
-                Uma boa nota também pode ser uma pergunta. Deixe uma isca para a
-                próxima mesa.
-              </p>
-            </div>
-          </div>
           <div className="panel-surface notes-key">
             <div className="mini-panel-heading">
               <span className="icon-disc cyan">

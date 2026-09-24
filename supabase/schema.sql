@@ -22,7 +22,6 @@ create table public.roll_events (
 	score integer not null default 0,
 	die integer not null,
 	total integer not null,
-	success boolean not null,
 	created_at timestamptz not null default now()
 );
 

@@ -150,6 +150,9 @@ Depois, rode as migrations na ordem:
 ```
 supabase/migrations/002_roll_events.sql
 supabase/migrations/003_multiple_sheets.sql
+supabase/migrations/004_read_own_roll_events.sql
+supabase/migrations/005_remove_single_sheet_constraint.sql
+supabase/migrations/006_remove_roll_outcome.sql
 ```
 
 Para transformar a conta da administradora em admin:

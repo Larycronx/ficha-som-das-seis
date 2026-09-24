@@ -6,7 +6,6 @@ create table if not exists public.roll_events (
   score integer not null default 0,
   die integer not null,
   total integer not null,
-  success boolean not null,
   created_at timestamptz not null default now()
 );
 
@@ -21,6 +20,11 @@ create policy "Users can create their roll events"
 create policy "Admins can read roll events"
   on public.roll_events for select
   using (public.is_admin());
+
+drop policy if exists "Users can read their roll events" on public.roll_events;
+create policy "Users can read their roll events"
+  on public.roll_events for select
+  using (user_id = auth.uid());
 
  drop policy if exists "Admins can delete sheets" on public.character_sheets;
 create policy "Admins can delete sheets"
