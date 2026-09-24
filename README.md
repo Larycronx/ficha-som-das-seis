@@ -210,11 +210,7 @@ O desenvolvimento contou com apoio de inteligência artificial como ferramenta d
 
 <div align="center">
 
-```
-═══════════════════════════════════════════
-   ★  Feito com poeira, café e d6  ★
-═══════════════════════════════════════════
-```
+
 
 [**▶ Acessar a ficha**](https://ficha-som-das-seis.vercel.app)
 
