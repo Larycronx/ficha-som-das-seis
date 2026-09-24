@@ -6,7 +6,7 @@
 
 <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Playfair+Display&size=16&pause=1000&color=B3B851&width=435&lines=Ficha+digital+online+para+o+sistema+de+RPG+Som+das+Seis" alt="Typing SVG" /></a>
 
-## Sua personagem, seu cartaz de procurado, sua rolagem, direto no navegador.
+<h4>## Sua personagem, seu cartaz de procurado, sua rolagem, direto no navegador.</h4>  
 <br>
 
 [![Entrar na mesa](https://img.shields.io/badge/ENTRAR_NA_MESA-161110?style=for-the-badge&labelColor=161110&color=161110)](https://ficha-som-das-seis.vercel.app)
