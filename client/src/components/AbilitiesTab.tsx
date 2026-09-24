@@ -12,8 +12,6 @@ type AbilitiesTabProps = {
   locked: boolean;
 };
 
-const MAX_SELECTED = 2;
-
 export default function AbilitiesTab({
   selectedIds,
   onChange,
@@ -46,7 +44,6 @@ export default function AbilitiesTab({
       onChange(selectedIds.filter(selectedId => selectedId !== id));
       return;
     }
-    if (selectedIds.length >= MAX_SELECTED) return;
     onChange([...selectedIds, id]);
   };
 
@@ -58,9 +55,9 @@ export default function AbilitiesTab({
           <h2>Habilidades da personagem</h2>
           <p>Escolha duas habilidades para destacar sua personagem.</p>
         </div>
-        <div className={`ability-counter ${selectedIds.length === MAX_SELECTED ? "complete" : ""}`}>
+        <div className="ability-counter">
           <Sparkles size={15} />
-          <strong>Habilidades escolhidas: {selectedIds.length}/{MAX_SELECTED}</strong>
+          <strong>Habilidades escolhidas: {selectedIds.length}</strong>
         </div>
       </section>
 
@@ -70,11 +67,7 @@ export default function AbilitiesTab({
             <div className="eyebrow">ESCOLHAS DA PERSONAGEM</div>
             <h3>Em destaque</h3>
           </div>
-          {selectedIds.length === MAX_SELECTED ? (
-            <span className="ability-limit-message"><Check size={14} /> limite preenchido</span>
-          ) : (
-            <span className="ability-limit-message">Escolha mais {MAX_SELECTED - selectedIds.length}</span>
-          )}
+          <span className="ability-limit-message"><Check size={14} /> escolhas livres</span>
         </div>
         {selectedAbilities.length ? (
           <div className="selected-ability-list">
@@ -83,6 +76,7 @@ export default function AbilitiesTab({
                 <div>
                   <strong>{ability.name}</strong>
                   <span>{ability.category}</span>
+                  <p>{ability.description}</p>
                 </div>
                 <button
                   type="button"
@@ -131,7 +125,6 @@ export default function AbilitiesTab({
           <div className="abilities-list">
             {visibleAbilities.map(ability => {
               const selected = selectedIds.includes(ability.id);
-              const limitReached = !selected && selectedIds.length >= MAX_SELECTED;
               return (
                 <article className={`ability-card ${selected ? "selected" : ""}`} key={ability.id}>
                   <div className="ability-card-copy">
@@ -146,7 +139,7 @@ export default function AbilitiesTab({
                     type="button"
                     className={`ability-action ${selected ? "remove" : ""}`}
                     onClick={() => toggleAbility(ability.id)}
-                    disabled={locked || limitReached}
+                    disabled={locked}
                     aria-pressed={selected}
                   >
                     {selected ? <X size={15} /> : <Plus size={15} />}

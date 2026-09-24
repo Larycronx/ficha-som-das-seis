@@ -197,6 +197,7 @@ button:focus-visible, input:focus-visible, textarea:focus-visible { box-shadow: 
 .selected-ability div { display: grid; min-width: 0; gap: 4px; }
 .selected-ability strong { overflow: hidden; color: #315b59; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .03em; text-overflow: ellipsis; white-space: nowrap; }
 .selected-ability span { color: #718b82; font-size: 10px; }
+.selected-ability p { margin: 3px 0 0; color: #617b72; font-size: 10px; line-height: 1.45; }
 .ability-remove-icon { display: grid; width: 30px; height: 30px; flex: 0 0 auto; place-items: center; border: 1px solid #c5d8ce; border-radius: 5px; background: transparent; color: #6b8980; }
 .ability-remove-icon:hover { background: #fff5f0; color: var(--rose); }
 .ability-remove-icon:disabled { cursor: not-allowed; opacity: .45; }
