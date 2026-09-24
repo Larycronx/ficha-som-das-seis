@@ -1,0 +1,9 @@
+{
+  "id": "som-das-seis-rolls",
+  "title": "Som das Seis - Rolagens do site",
+  "description": "Exibe no chat do Foundry as rolagens feitas no site Som das Seis.",
+  "version": "1.0.0",
+  "compatibility": { "minimum": "11", "verified": "12" },
+  "authors": [{ "name": "Som das Seis" }],
+  "esmodules": ["scripts/som-das-seis-rolls.js"]
+}

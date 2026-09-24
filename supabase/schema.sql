@@ -14,6 +14,18 @@ create table public.character_sheets (
 	updated_at timestamptz not null default now()
 );
 
+create table public.roll_events (
+	id uuid primary key default gen_random_uuid(),
+	user_id uuid not null references public.profiles(id) on delete cascade,
+	character_name text not null default '',
+	roll_name text not null,
+	score integer not null default 0,
+	die integer not null,
+	total integer not null,
+	success boolean not null,
+	created_at timestamptz not null default now()
+);
+
 create or replace function public.is_admin()
 returns boolean
 language sql
@@ -47,6 +59,7 @@ create trigger on_auth_user_created
 
 alter table public.profiles enable row level security;
 alter table public.character_sheets enable row level security;
+alter table public.roll_events enable row level security;
 
 create policy "Users can read their profile"
 	on public.profiles for select
@@ -65,6 +78,18 @@ create policy "Users can update their sheet"
 	using (user_id = auth.uid())
 	with check (user_id = auth.uid());
 
+create policy "Users can create their roll events"
+	on public.roll_events for insert
+	with check (user_id = auth.uid());
+
+create policy "Admins can read roll events"
+	on public.roll_events for select
+	using (public.is_admin());
+
+create policy "Admins can delete sheets"
+	on public.character_sheets for delete
+	using (public.is_admin());
+
 create or replace view public.admin_sheet_overview
 with (security_invoker = true)
 as
@@ -75,6 +100,12 @@ select
 	profiles.email as owner_email
 from public.character_sheets sheets
 join public.profiles profiles on profiles.id = sheets.user_id;
+
+do $$
+begin
+	alter publication supabase_realtime add table public.roll_events;
+exception when duplicate_object then null;
+end $$;
 
 -- Depois de criar a conta administrativa, execute:
 -- update public.profiles

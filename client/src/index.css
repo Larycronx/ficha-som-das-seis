@@ -372,6 +372,7 @@ button:focus-visible, input:focus-visible, textarea:focus-visible { box-shadow: 
 .admin-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
 .admin-actions { display: flex; gap: 8px; }
 .admin-button { min-height: 36px; padding: 0 12px; background: var(--paper-warm); border: 1px solid var(--line); color: var(--text); font-size: 12px; }
+.danger-button { border-color: #e3b2ad; color: #a8322c; }
 .admin-list { margin-top: 24px; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; background: rgba(248, 240, 223, .72); }
 .admin-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 20px; border-bottom: 1px solid var(--line); }
 .admin-row:last-child { border-bottom: 0; }

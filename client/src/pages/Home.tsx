@@ -370,7 +370,17 @@ export default function Home({
     const score = Number(sheet[key] ?? 0);
     const die = Math.floor(Math.random() * 6) + 1;
     const total = die + score;
-    setRoll({ name: label, score, die, total, success: total >= 7 });
+    const success = total >= 7;
+    setRoll({ name: label, score, die, total, success });
+    void supabase?.from("roll_events").insert({
+      user_id: user.id,
+      character_name: sheet.characterName || "Personagem sem nome",
+      roll_name: label,
+      score,
+      die,
+      total,
+      success,
+    });
   };
 
   const toggleLock = () => {
