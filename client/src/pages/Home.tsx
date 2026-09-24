@@ -29,6 +29,7 @@ import {
 import { toast } from "sonner";
 import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
+import { attributes, skills } from "@/data/sheet-fields";
 import AbilitiesTab from "@/components/AbilitiesTab";
 
 type TabKey = "personagem" | "habilidades" | "equipamentos" | "montaria" | "notas";
@@ -134,52 +135,6 @@ const tabs: {
     icon: NotebookPen,
     hint: "Anotações da sessão",
   },
-];
-
-const attributes = [
-  {
-    key: "fis_score",
-    label: "Físico",
-    short: "FIS",
-    icon: "◆",
-    color: "amber",
-    description: "Força, resistência e presença corporal.",
-  },
-  {
-    key: "agi_score",
-    label: "Agilidade",
-    short: "AGI",
-    icon: "↗",
-    color: "cyan",
-    description: "Reflexos, velocidade e precisão.",
-  },
-  {
-    key: "int_score",
-    label: "Intelecto",
-    short: "INT",
-    icon: "✦",
-    color: "violet",
-    description: "Raciocínio, percepção e conhecimento.",
-  },
-  {
-    key: "cor_score",
-    label: "Coragem",
-    short: "COR",
-    icon: "✹",
-    color: "rose",
-    description: "Vontade, ousadia e sangue-frio.",
-  },
-];
-
-const skills = [
-  { key: "combate_score", label: "Combate", icon: Swords },
-  { key: "negocios_score", label: "Negócios", icon: Sparkles },
-  { key: "montaria_score", label: "Montaria", icon: PawPrint },
-  { key: "tradicao_score", label: "Tradição", icon: BookOpen },
-  { key: "labuta_score", label: "Labuta", icon: Flame },
-  { key: "exploracao_score", label: "Exploração", icon: Eye },
-  { key: "roubo_score", label: "Roubo", icon: WandSparkles },
-  { key: "medicina_score", label: "Medicina", icon: Heart },
 ];
 
 const cloneDefault = (): Sheet => JSON.parse(JSON.stringify(defaultSheet));
@@ -336,7 +291,7 @@ export default function Home({
   const [roll, setRoll] = useState<RollResult | null>(null);
   const [rollOpen, setRollOpen] = useState(false);
   const [rollPulse, setRollPulse] = useState(0);
-  const [selectedSkillKey, setSelectedSkillKey] = useState(skills[0].key);
+  const [selectedSkillKey, setSelectedSkillKey] = useState<string>(skills[0].key);
   const [lastSaved, setLastSaved] = useState("agora");
   const photoInputRef = useRef<HTMLInputElement>(null);
   const handleBack = () => onBack();
