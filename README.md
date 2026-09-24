@@ -4,7 +4,7 @@
 
 <br>
 
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Playfair+Display&size=16&pause=1000&color=B3B851&width=435&lines=Ficha+digital+online+para+o+sistema+de+RPG+Som+das+Seis" alt="Typing SVG" /></a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Playfair+Display&weight=800&size=16&pause=1000&color=B3B851&width=435&lines=Ficha+digital+online+para+o+sistema+de+RPG+Som+das+Seis" alt="Typing SVG" /></a>
 
 <h4>## Sua personagem, seu cartaz de procurado, sua rolagem, direto no navegador.</h4>  
 <br>
