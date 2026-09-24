@@ -418,6 +418,8 @@ export default function Home({
     );
   };
 
+  const toggleRollPanel = () => setRollOpen(current => !current);
+
   const handlePhoto = (event: ChangeEvent<HTMLInputElement>) => {
     // Converte a imagem escolhida em Data URL para poder salvá-la localmente.
     const file = event.target.files?.[0];
@@ -965,13 +967,21 @@ export default function Home({
       <aside className={`roll-sidebar ${rollOpen ? "is-open" : ""}`}>
         <button
           className="roll-tab"
-          onClick={() => setRollOpen(current => !current)}
+          onClick={toggleRollPanel}
           aria-expanded={rollOpen}
           aria-label={rollOpen ? "Fechar resultado da rolagem" : "Abrir resultado da rolagem"}
         >
           <Dice5 size={16} /> <span>Resultado</span>
         </button>
-        <div className="roll-sidebar-header">
+        <div
+          className="roll-sidebar-header"
+          onClick={toggleRollPanel}
+          onKeyDown={event => {
+            if (event.key === "Enter" || event.key === " ") toggleRollPanel();
+          }}
+          role="button"
+          tabIndex={0}
+        >
           <div>
             <div className="eyebrow">MESA DE ROLAGEM</div>
             <h2>Resultado</h2>

@@ -297,7 +297,7 @@ button:focus-visible, input:focus-visible, textarea:focus-visible { box-shadow: 
   .roll-sidebar.is-open { transform: translateY(0); }
   .roll-tab { position: absolute; top: 0; left: 16px; display: inline-flex; align-items: center; gap: 7px; min-height: 38px; padding: 0 11px; border: 1px solid rgba(82, 199, 201, .35); border-radius: 0 0 8px 8px; background: #2b4545; color: #d8efea; font-family: 'DM Mono', monospace; font-size: 9px; text-transform: uppercase; }
   .roll-tab:active { transform: translateY(2px) scale(.97); }
-  .roll-sidebar-header { margin-bottom: 12px; }
+  .roll-sidebar-header { margin-bottom: 12px; cursor: pointer; }
   .roll-sidebar h2 { font-size: 18px; }
   .roll-empty { padding: 18px 12px 20px; }
   .empty-orbit { width: 48px; height: 48px; margin-bottom: 10px; }
