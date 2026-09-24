@@ -4,9 +4,7 @@
 
 <br>
 
-### Ficha digital online para o sistema de RPG **Som das Seis**
-
-*Sua personagem, seu cartaz de procurado, sua rolagem, direto no navegador.*
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Playfair+Display&size=16&pause=1000&color=B3B851&width=435&lines=Ficha+digital+online+para+o+sistema+de+RPG+Som+das+Seis;Sua+personagem%2C+seu+cartaz+de+procurado%2C+sua+rolagem%2C+direto+no+navegador." alt="Typing SVG" /></a>
 
 <br>
 
