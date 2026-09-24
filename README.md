@@ -32,13 +32,11 @@
 <br><sub><b>Entrar na mesa</b><br>Login com e-mail e senha</sub>
 </td>
 <td align="center" width="33%">
-<!-- <img src="docs/screenshots/fichas.png" alt="Tela inicial com as fichas" width="100%"> -->
-<br><br><sub><i>Em breve</i></sub><br><br>
+<img width="739" height="1356" alt="image" src="https://github.com/user-attachments/assets/3698fea8-2f88-44a4-b1a2-9507ba97a634" />
 <br><sub><b>Minhas fichas</b><br>Cartões de personagem</sub>
 </td>
 <td align="center" width="33%">
-<!-- <img src="docs/screenshots/ficha.png" alt="Ficha da personagem" width="100%"> -->
-<br><br><sub><i>Em breve</i></sub><br><br>
+<img width="739" height="1404" alt="image" src="https://github.com/user-attachments/assets/89e68f4f-82a5-46ea-addc-26aacab51427" />
 <br><sub><b>Ficha da personagem</b><br>Atributos, inventário e rolagens</sub>
 </td>
 </tr>
@@ -258,7 +256,7 @@ Este projeto nasceu de uma necessidade real durante uma campanha de RPG:<br>
 em vez de deixar uma jogadora sem acesso à ficha, foi criada uma alternativa própria,<br>
 acessível pelo navegador e adaptada ao funcionamento da mesa.
 
-O desenvolvimento contou com apoio de inteligência artificial como ferramenta de programação,<br>
+O desenvolvimento contou com apoio de inteligência artificial como ferramenta de suporte para programação,<br>
 organização, documentação e resolução de problemas técnicos.<br>
 As decisões sobre a necessidade do sistema, o funcionamento da mesa e a solução final<br>
 foram definidas para atender ao grupo.
