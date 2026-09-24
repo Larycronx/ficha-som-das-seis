@@ -6,7 +6,7 @@
 ═══════════════════════════════════════════
 ```
 
-# 🤠 SOM DAS SEIS
+#  SOM DAS SEIS
 
 ### Ficha digital online para o sistema de RPG **Som das Seis**
 
