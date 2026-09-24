@@ -13,10 +13,16 @@ export default function AuthScreen() {
     event.preventDefault();
     if (!supabase) return;
 
+    const normalizedEmail = email.trim().toLowerCase();
+    if (normalizedEmail.length > 254) {
+      toast.error("E-mail muito longo", { description: "Use um endereço com até 254 caracteres." });
+      return;
+    }
+
     setLoading(true);
     const result = isSignUp
-      ? await supabase.auth.signUp({ email, password })
-      : await supabase.auth.signInWithPassword({ email, password });
+      ? await supabase.auth.signUp({ email: normalizedEmail, password })
+      : await supabase.auth.signInWithPassword({ email: normalizedEmail, password });
     setLoading(false);
 
     if (result.error) {
@@ -50,7 +56,7 @@ export default function AuthScreen() {
         <h1>{isSignUp ? "Criar sua ficha" : "Entrar na mesa"}</h1>
         <p className="auth-copy">Cada conta mantém sua ficha salva e acessível em qualquer dispositivo.</p>
         <form className="auth-form" onSubmit={handleSubmit}>
-          <label><span>E-mail</span><input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required autoComplete="email" /></label>
+          <label><span>E-mail</span><input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required maxLength={254} autoComplete="email" autoCapitalize="none" autoCorrect="off" spellCheck={false} inputMode="email" /></label>
           <label><span>Senha</span><input type="password" value={password} onChange={(event) => setPassword(event.target.value)} minLength={6} required autoComplete={isSignUp ? "new-password" : "current-password"} /></label>
           <button className="auth-submit" disabled={loading}>{isSignUp ? <UserPlus size={16} /> : <LogIn size={16} />}{loading ? "Aguarde..." : isSignUp ? "Criar conta" : "Entrar"}</button>
         </form>
