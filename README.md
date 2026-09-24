@@ -32,11 +32,11 @@
 <br><sub><b>Entrar na mesa</b><br>Login com e-mail e senha</sub>
 </td>
 <td align="center" width="33%">
-<img width="739" height="1356" alt="image" src="https://github.com/user-attachments/assets/3698fea8-2f88-44a4-b1a2-9507ba97a634" />
+<img width="540" height="660" alt="image" src="https://github.com/user-attachments/assets/0743a188-aa36-4fcf-9572-48d7f5070a66" />
 <br><sub><b>Minhas fichas</b><br>Cartões de personagem</sub>
 </td>
 <td align="center" width="33%">
-<img width="739" height="1404" alt="image" src="https://github.com/user-attachments/assets/89e68f4f-82a5-46ea-addc-26aacab51427" />
+<img width="540" height="660" alt="image" src="https://github.com/user-attachments/assets/387bb7d6-0792-4a2c-89c8-fcc337bb844d" />
 <br><sub><b>Ficha da personagem</b><br>Atributos, inventário e rolagens</sub>
 </td>
 </tr>
