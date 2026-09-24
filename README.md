@@ -1,15 +1,12 @@
 <div align="center">
 
-<img src="docs/assets/borda-laranja.svg" width="100%" alt="">
+<img src="https://capsule-render.vercel.app/api?type=waving&height=229&color=timeGradient&section=header&reversal=true&text=SOM+DAS+SEIS&textBg=false&fontColor=F5DEB3&fontSize=65&fontAlign=50&fontAlignY=50&animation=twinkling&rotate=0&strokeWidth=0&descSize=20&descAlign=50&descAlignY=60" width="100%" alt="SOM DAS SEIS Banner">
 
 <br>
 
-# SOM DAS SEIS
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Playfair+Display&weight=800&size=16&pause=1000&color=B3B851&width=435&lines=Ficha+digital+online+para+o+sistema+de+RPG+Som+das+Seis" alt="Typing SVG" /></a>
 
-### Ficha digital online para o sistema de RPG **Som das Seis**
-
-*Sua personagem, seu cartaz de procurado, sua rolagem, direto no navegador.*
-
+<h5 align="center">## Sua personagem, seu cartaz de procurado, sua rolagem, direto no navegador.</h5>  
 <br>
 
 [![Entrar na mesa](https://img.shields.io/badge/ENTRAR_NA_MESA-161110?style=for-the-badge&labelColor=161110&color=161110)](https://ficha-som-das-seis.vercel.app)
@@ -266,20 +263,15 @@ em vez de deixar uma jogadora sem acesso à ficha, foi criada uma alternativa pr
 acessível pelo navegador e adaptada ao funcionamento da mesa.
 
 O desenvolvimento contou com apoio de inteligência artificial como ferramenta de suporte para programação,<br>
-organização, documentação e resolução de problemas técnicos.<br>
+organização e documentação.<br>
 As decisões sobre a necessidade do sistema, o funcionamento da mesa e a solução final<br>
 foram definidas para atender ao grupo.
 
-<br>
+[![Entrar na mesa](https://img.shields.io/badge/ENTRAR_NA_MESA-161110?style=for-the-badge&labelColor=161110&color=161110)](https://ficha-som-das-seis.vercel.app)
 
-<img src="docs/assets/divisor-laranja.svg" width="100%" alt="">
 
-<br>
+<a href="https://ficha-som-das-seis.vercel.app">
+  <img src="https://capsule-render.vercel.app/api?type=waving&height=229&color=timeGradient&section=footer&reversal=true&textBg=false&fontColor=F5DEB3&fontSize=65&fontAlign=50&fontAlignY=63&animation=twinkling&rotate=0&strokeWidth=0&descSize=20&descAlign=50&descAlignY=60" width="100%" alt="Entrar na mesa">
+</a>
 
-[**Entrar na mesa**](https://ficha-som-das-seis.vercel.app)
 
-<br>
-
-<img src="docs/assets/borda-laranja.svg" width="100%" alt="">
-
-</div>
